@@ -1,0 +1,56 @@
+🛠️ My Lab Setup:-
+
+To run these commands, I started a fresh Ubuntu environment using Docker:-
+
+docker run -it ubuntu /bin/bash
+apt update && apt install -y systemd htop procps net-tools
+
+1. Process Checks:-
+
+I checked what's running inside my container.
+
+Command: ps aux
+
+Observation: I saw that /bin/bash is PID 1 inside the container. This is different from a real VM where systemd is usually PID 1.
+
+Command: top -n 1
+
+Observation: Captured a snapshot of CPU and Memory. Since it's a fresh container, usage was very low.
+
+2. Service Checks:-
+
+Inside Docker, services behave differently, but I practiced the commands used on production servers.
+
+Command: systemctl list-units --type=service
+
+Observation: Checked which services are available. (Note: In some Docker containers, you might need to use service --status-all if systemd isn't fully initialized).
+
+Command: systemctl status
+
+Observation: Used this to see the overall "health" hierarchy of the system processes.
+
+3. Log Checks:-
+
+Command: tail -n 10 /var/log/alternatives.log
+
+Observation: I checked the last 10 lines of the installation logs to see what packages were recently updated.
+
+Command: ls -l /var/log
+
+Observation: Listed all available log files in the system to know where to look for errors.
+
+4. Mini Troubleshooting Flow: "The Missing Network Tool":-
+
+1.The Problem: I tried to run ifconfig but the command was not found.
+
+2.Investigation: I ran ls /sbin to see if it existed. It didn't.
+
+3.Resolution: I ran apt update && apt install net-tools -y.
+
+4.Verification: Ran ifconfig again, and now it displays my container's internal IP address.
+
+
+
+
+
+
