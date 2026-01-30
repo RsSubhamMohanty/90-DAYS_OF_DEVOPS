@@ -1,0 +1,47 @@
+Linux Architecture, Processes, and systemd
+
+1. Core Components of Linux ?
+
+The Linux OS is divided into two main "spaces" to ensure stability and security.
+
+Hardware: The physical layer (CPU, RAM, Disk).
+
+Kernel: The "brain." It talks to the hardware and manages resources. It is the bridge between software and hardware.
+
+User Space: Where your applications (Docker, Nginx, Python) and shell run.
+
+Init System (systemd): The very first process (PID 1) that starts after the kernel boots. It manages all other processes.
+
+
+2. Process Management ?
+
+Every task in Linux is a Process. When you run a command, the system creates a process with a unique PID (Process ID).
+
+Process Lifecycle States
+
+Running (R): The process is currently using the CPU.
+
+Sleeping (S/D): Waiting for an event (like user input) or hardware resource.
+
+Stopped (T): The process has been suspended (e.g., via Ctrl+Z).
+
+Zombie (Z): The process is finished, but its parent hasn't acknowledged it yet. It stays in the process table but uses no RAM.
+
+3. What is systemd?
+
+systemd is the modern system and service manager for Linux. It replaced the old "SysVinit."
+
+Why it matters: It starts services in parallel (faster booting), manages logs via journald, and automatically restarts failed services.
+
+Unit Files: Configuration files (usually ending in .service) that tell Linux how to run a specific app.
+
+4. Daily DevOps Toolkit (Top 5 Commands)
+
+   command                                                     Purpose  
+
+top or htop                                            Real-time view of CPU/RAM and running processes.
+ps aux                                                 Snapshot of every running process on the system.
+kill -9 <PID>                                          Forcefully terminate a stuck process.
+systemctl status <service>                             Check if a service (like Docker) is running or failed.
+journalctl -u <service> -f                             View live logs for a specific service to debug errors.
+
