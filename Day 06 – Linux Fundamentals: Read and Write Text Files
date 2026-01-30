@@ -1,0 +1,42 @@
+Linux File I/O Practice 📝
+🛠️ Lab Environment
+OS: Ubuntu (Running via Docker)
+Shell: Bash
+
+1. Creating and Writing Files
+I practiced the difference between Overwriting (>) and Appending (>>).
+
+Command: touch notes.txt
+Action: Created an empty file named notes.txt.
+Command: echo "DevOps is about automation and culture." > notes.txt
+Action: Wrote the first line. Using > overwrites anything previously in the file.
+Command: echo "Linux is the heart of MLOps pipelines." >> notes.txt
+Action: Appended a second line. Using >> adds text to the end without deleting existing content.
+
+2. Advanced Writing with tee
+
+Command: echo "Learning Redirection on Day 06" | tee -a notes.txt
+Action: This command is powerful because it displays the output in my terminal and writes it to the file at the same time. The -a flag ensures it appends rather than overwrites.
+
+3. Reading and Inspecting Files
+
+Once the file had multiple lines, I practiced reading specific parts of it.
+Command: cat notes.txt
+Observation: Displayed all 3 lines I wrote earlier.
+Command: head -n 2 notes.txt
+Observation: Displayed only the first 2 lines. Useful when you want to see the header of a large CSV or log file.
+Command: tail -n 1 notes.txt
+Observation: Displayed the last line. This is the go-to command for checking the most recent entries in a system log.
+
+4. Summary Table of Commands Used
+
+         Command                                          Purpose
+  touch                                              Create a new empty file.
+  >                                                  Redirect output to a file (Overwrites).
+  >>                                                 Redirect output to a file (Appends).
+  tee -a                                             Show output and append to a file simultaneously.
+  cat                                                View entire file content.
+  head                                               View the top of the file.
+
+
+tail                                               View the bottom of the file.
