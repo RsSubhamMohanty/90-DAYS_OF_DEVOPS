@@ -1,0 +1,38 @@
+Linux DevOps Cheat Sheet 🐧
+
+📁 File System & Navigation:-
+
+1.pwd – Print current working directory path.
+2.ls -lah – List all files (including hidden) with human-readable sizes.
+3.cd - – Switch back to the previous directory instantly.
+4.mkdir -p path/to/dir – Create nested directories in one go.
+5.cp -r – Recursively copy directories.
+6.mv – Move or rename files/folders.
+7.rm -rf – Forcefully and recursively remove files (use with caution!).
+8.chmod 755 – Set read/write/execute permissions (common for scripts).
+9.chown user:group – Change ownership of a file or directory.
+
+⚙️ Process & Resource Management:-
+
+10.top – View real-time system resource usage (CPU/RAM).
+11.htop – Interactive, color-coded process viewer (DevOps favorite).
+12.ps aux | grep <name> – Search for a specific running process.
+13.kill -9 <PID> – Forcefully kill a process by its ID.
+14.df -h – Check available disk space in human-readable format.
+15.du -sh * – Check the size of files/folders in the current directory.
+16.free -m – Check system memory (RAM) usage in MB.
+
+🌐 Network Troubleshooting:-
+
+17.ip addr – Display IP addresses and network interface details.
+18.ping <host> – Check connectivity to a remote server.
+19.curl -I <url> – Fetch the HTTP header of a URL (great for debugging APIs).
+20.dig <domain> – Perform DNS lookups to check domain resolution.
+21.netstat -tunlp – List all active ports and the programs using them.
+
+🔍 Logs & Text Processing:-
+
+22.tail -f <file> – Follow log files in real-time (essential for debugging).
+23.grep -i "error" <file> – Search for "error" in a file, ignoring case.
+24.cat /etc/os-release – Check the Linux distribution details.
+
