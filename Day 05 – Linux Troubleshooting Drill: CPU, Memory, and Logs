@@ -1,0 +1,52 @@
+Linux Troubleshooting Runbook 🛠️
+Target Service/Process: apt / bash (System Environment)
+
+1. Environment Basics:-
+
+Command: cat /etc/os-release
+Observation: Confirmed I am running Ubuntu 22.04.x LTS inside a Docker container.
+Command: uname -a
+Observation: Shows the Kernel version. Note: In Docker, this shows the Host's kernel version, as containers share the host kernel.
+
+2. Filesystem Sanity:-
+
+Command: mkdir /tmp/runbook-demo && cp /etc/hosts /tmp/runbook-demo/hosts-copy
+Command: ls -l /tmp/runbook-demo
+Observation: Verified that I have "Write" permissions in the /tmp directory and the file copy was successful.
+
+3. CPU & Memory Snapshot:-
+
+Command: free -h
+Observation: Checked available RAM. Since I am in Docker, this reflects the limit allowed by the Docker Desktop/Daemon settings.
+Command: ps -o pid,pcpu,pmem,comm
+Observation: Viewed specific resource usage. bash is idling at 0.0% CPU, which is expected for an inactive terminal.
+
+4. Disk & IO Snapshot:-
+
+Command: df -h
+Observation: Checked overlay filesystem usage. The container has plenty of space available from the Docker virtual disk.
+Command: du -sh /var/log
+Observation: Log directory size is minimal (under 1MB) because this is a fresh practice container.
+
+5. Network Snapshot:-
+
+Command: netstat -tulpn (or ss -tulpn)
+Observation: No active listening ports found yet, as I haven't started a web server (like Nginx) inside this container.
+Command: ping -c 3 google.com
+Observation: Successful response. Confirmed the container has outbound internet access to download packages.
+
+6. Logs Reviewed:-
+
+Command: tail -n 50 /var/log/dpkg.log
+Observation: Traced the history of apt install commands I ran earlier. No installation errors found.
+Command: ls -t /var/log | head -n 5
+Observation: Identified the 5 most recently updated log files to see where current system activity is being recorded.
+
+🔍 Quick Findings:-
+The system is healthy. Resource usage is negligible. The filesystem is writable, and networking is functional. No "Zombie" processes or CPU spikes detected.
+
+🚨 If This Worsens (Next Steps):-
+Check Container Stats: From the host machine command prompt, run docker stats to see if the container is hitting its memory limit.
+Increase Verbosity: If a command fails, run it with strace (e.g., strace ls) to see the exact system call where it hangs.
+Process Restart: If a background process hangs, use kill -15 <PID> (graceful) followed by kill -9 <PID> (force) if it remains unresponsive.
+
